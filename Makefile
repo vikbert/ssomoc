@@ -8,13 +8,13 @@ help:
 
 #-- db
 db-clean: ## clean the db
-	symfony console doctrine:database:drop --if-exists -n --force
-	symfony console doctrine:database:create --if-not-exists -n
-	symfony console doctrine:migrations:migrate -vvv -n
+	docker-compose exec php bin/console doctrine:database:drop --if-exists -n --force
+	docker-compose exec php bin/console doctrine:database:create --if-not-exists -n
+	docker-compose exec php bin/console doctrine:migrations:migrate -n
 
 db-reset: ## reset the database
 	make db-clean
-	symfony console doctrine:fixtures:load -n
+	docker-compose run --rm php bin/console doctrine:fixtures:load -n
 
 #-- docker
 docker-clean: ## clean up all docker resource
