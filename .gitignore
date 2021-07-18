@@ -2,3 +2,4 @@
 .php-cs-fixer.cache
 node_modules/*
 logs/nginx/*
+.idea

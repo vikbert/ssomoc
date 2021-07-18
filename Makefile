@@ -17,6 +17,11 @@ start: ## start the application
 	make db-migrate
 	open http://localhost
 
+restart: ## restart the application
+	docker-compose up -d
+	make db-reset
+	open http://localhost
+
 
 #-- db
 db-reset: ## reset the db
