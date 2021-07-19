@@ -1,0 +1,291 @@
+{
+  "version": 6,
+  "entities": [
+    {
+      "entity": {
+        "type": "Project",
+        "id": "f3104fbb-278f-4420-93a2-9cb2ec0b34c4",
+        "name": "🤡 SIAM Fake Server"
+      },
+      "children": [
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": [
+                  {
+                    "enabled": true,
+                    "type": "Text",
+                    "name": "email",
+                    "value": "siam@siam.siam"
+                  },
+                  {
+                    "enabled": true,
+                    "type": "Text",
+                    "name": "password",
+                    "value": "siam"
+                  }
+                ]
+              },
+              "bodyType": "Form",
+              "textBody": "option: credential\nemail: siam@siam.siam\npassword: siam\nclient_id: fakeclientid\nredirect_uri: http://localhost/api/sso/check\nstate: undefined"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": [
+                  {
+                    "enabled": true,
+                    "name": "redirect_uri",
+                    "value": "http://localhost/api/sso/check"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "client_id",
+                    "value": "fakeclientid"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "state",
+                    "value": "stateless"
+                  }
+                ]
+              },
+              "scheme": {
+                "name": "http",
+                "version": "V11"
+              },
+              "host": "localhost:1234",
+              "path": "/login"
+            },
+            "id": "01b01b2a-4d42-417c-9146-7d1685ebde48",
+            "name": "01 GET :: Login",
+            "headers": []
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": [
+                  {
+                    "enabled": true,
+                    "name": "scope",
+                    "value": "siam"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "response_type",
+                    "value": "code"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "redirect_uri",
+                    "value": "http://localhost/api/sso/check"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "client_id",
+                    "value": "fakeclientid"
+                  }
+                ]
+              },
+              "scheme": {
+                "name": "http",
+                "version": "V11"
+              },
+              "host": "localhost:1234",
+              "path": "/authz"
+            },
+            "id": "7df052bf-3c81-42a2-9a74-89dc3c147df9",
+            "name": "02 GET :: authz (via Browser location bar)",
+            "headers": []
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "requestBody": true,
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+              "name": "POST"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": [
+                  {
+                    "enabled": true,
+                    "type": "Text",
+                    "name": "email",
+                    "value": "siam@siam.siam"
+                  },
+                  {
+                    "enabled": true,
+                    "type": "Text",
+                    "name": "password",
+                    "value": "siam"
+                  },
+                  {
+                    "enabled": true,
+                    "type": "Text",
+                    "name": "redirect_uri",
+                    "value": "http://localhost/api/sso/check"
+                  },
+                  {
+                    "enabled": true,
+                    "type": "Text",
+                    "name": "client_id",
+                    "value": "fakeclientid"
+                  },
+                  {
+                    "enabled": true,
+                    "type": "Text",
+                    "name": "state",
+                    "value": "168e2f0685b6a7abfc47dea0dd7df015"
+                  }
+                ]
+              },
+              "bodyType": "Form",
+              "textBody": "option: credential\nemail: siam@siam.siam\npassword: siam\nclient_id: fakeclientid\nredirect_uri: http://localhost/api/sso/check\nstate: undefined"
+            },
+            "uri": {
+              "scheme": {
+                "name": "http",
+                "version": "V11"
+              },
+              "host": "localhost:1234",
+              "path": "/login"
+            },
+            "id": "b8c600b2-1690-479f-b308-cabb0e72a0dd",
+            "name": "03 POST :: Login",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "requestBody": true,
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+              "name": "POST"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": [
+                  {
+                    "enabled": true,
+                    "type": "Text",
+                    "name": "client_id",
+                    "value": "fakeclientid"
+                  },
+                  {
+                    "enabled": true,
+                    "type": "Text",
+                    "name": "code",
+                    "value": "0e7896f83a07cda3df79551e"
+                  },
+                  {
+                    "enabled": true,
+                    "type": "Text",
+                    "name": "state",
+                    "value": "168e2f0685b6a7abfc47dea0dd7df015"
+                  },
+                  {
+                    "enabled": true,
+                    "type": "Text",
+                    "name": "grant_type",
+                    "value": "authorization_code"
+                  }
+                ]
+              },
+              "bodyType": "Form",
+              "textBody": ""
+            },
+            "uri": {
+              "scheme": {
+                "name": "http",
+                "version": "V11"
+              },
+              "host": "localhost:1234",
+              "path": "/token"
+            },
+            "id": "7f1ad479-1595-499a-b6c3-cb3c0419f4d7",
+            "name": "04 POST :: token",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "scheme": {
+                "name": "http",
+                "version": "V11"
+              },
+              "host": "localhost:1234",
+              "path": "/userinfo"
+            },
+            "id": "cad286dd-448f-49f2-bcc8-2503ea1d44a4",
+            "name": "05 GET :: userinfo",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4N2U2NjE4MDJhNTQ5NGUwNWY0ZjE3ZGVmNzhlMDlmZiIsImlhdCI6MTYxNjAxNjIxMSwiZXhwIjoxNjE2MTAyNjExfQ.fzc5Hf9UkwJqYCS_Td2CqFMb1DMIU441gzW8yOjDkC0"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
