@@ -16,9 +16,9 @@ security:
             provider: memory_user_provider
             guard:
                 authenticators:
+                    - App\Security\Authenticator\TokenAuthenticator
                     - App\Service\Siam\Security\SiamAuthenticator
                     - App\Security\Authenticator\LoginFormAuthenticator
-                    - App\Security\Authenticator\TokenAuthenticator
                     - App\Security\Authenticator\GithubAuthenticator
                 entry_point: App\Security\Authenticator\TokenAuthenticator
             stateless: true
@@ -26,8 +26,7 @@ security:
                 path: app_logout
 
     access_control:
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/github/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api/oauth, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/api, roles: ROLE_USER }
-        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
