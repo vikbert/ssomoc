@@ -3,3 +3,4 @@
 node_modules/*
 logs/nginx/*
 .idea
+**/.DS_Store
