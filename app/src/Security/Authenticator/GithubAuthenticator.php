@@ -6,7 +6,7 @@ namespace App\Security\Authenticator;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use App\Service\Siam\Security\SiamResourceOwner;
+use App\Module\Siam\Security\SiamResourceOwner;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;

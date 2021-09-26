@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace App\Service\Siam\Security;
+namespace App\Module\Siam\Security;
 
-use App\Service\Siam\SiamConstant;
+use App\Module\Siam\SiamConstant;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken;

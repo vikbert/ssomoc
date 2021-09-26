@@ -2,11 +2,11 @@
 
 declare(strict_types = 1);
 
-namespace App\Service\Siam\Security;
+namespace App\Module\Siam\Security;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use App\Service\Siam\SiamConstant;
+use App\Module\Siam\SiamConstant;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;

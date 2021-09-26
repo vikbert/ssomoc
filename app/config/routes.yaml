@@ -1,4 +1,4 @@
-!php/const:App\Service\Siam\SiamConstant::ROUTE_CHECK:
+!php/const:App\Module\Siam\SiamConstant::ROUTE_CHECK:
     path:     /api/siam/check
-    controller: App\Service\Siam\Controller\CheckController
+    controller: App\Module\Siam\Controller\CheckController
     methods: GET

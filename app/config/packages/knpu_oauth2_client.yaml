@@ -2,7 +2,7 @@ knpu_oauth2_client:
     clients:
         siam_client:
             type: generic
-            provider_class: App\Service\Siam\Security\SiamProvider
+            provider_class: App\Module\Siam\Security\SiamProvider
             provider_options:
                 baseAuthorizationUrl: '%env(SIAM_BASE_AUTHORIZATION_URL)%'
                 baseAccessTokenUrl: '%env(SIAM_BASE_ACCESS_TOKEN_URL)%'

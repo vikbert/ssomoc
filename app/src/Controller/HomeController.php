@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Service\Siam\SiamConstant;
+use App\Module\Siam\SiamConstant;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

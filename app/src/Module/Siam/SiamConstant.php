@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Service\Siam;
+namespace App\Module\Siam;
 
 final class SiamConstant
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace App\Service\Siam\Controller;
+namespace App\Module\Siam\Controller;
 
-use App\Service\Siam\SiamConstant;
+use App\Module\Siam\SiamConstant;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;

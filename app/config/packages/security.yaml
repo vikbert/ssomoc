@@ -17,7 +17,7 @@ security:
             guard:
                 authenticators:
                     - App\Security\Authenticator\TokenAuthenticator
-                    - App\Service\Siam\Security\SiamAuthenticator
+                    - App\Module\Siam\Security\SiamAuthenticator
                     - App\Security\Authenticator\LoginFormAuthenticator
                     - App\Security\Authenticator\GithubAuthenticator
                 entry_point: App\Security\Authenticator\TokenAuthenticator
