@@ -22,9 +22,7 @@
 ## Starting started
 
 ```
-git clone https://vcs.sys.schwarz/zhoux/siam-oauth2-fake-server-symfony-demo.git ssomoc
-
-# ✅ close now VPN connection
+git clone https://bitbucket.schwarz/scm/~zhoux/ssomoc.git
 cd ssomoc
 make start
 ```
@@ -108,46 +106,21 @@ SIAM_RESOURCE_OWNER_DETAILS_URL=http://siam:1234/userinfo
 
 ```bash
 ➜ docker-compose exec php bin/console debug:router
- ------------------- -------- -------- ------ --------------------------
-  Name                Method   Scheme   Host   Path
- ------------------- -------- -------- ------ --------------------------
-  api_mock_authz      GET      ANY      ANY    /api/oauth/mock/authz
-  api_mock_token      POST     ANY      ANY    /api/oauth/mock/token
-  api_mock_userinfo   GET      ANY      ANY    /api/oauth/mock/userinfo
-
-  api_sso_check       GET      ANY      ANY    /api/sso/check
-  api_sso_info        GET      ANY      ANY    /api/sso/info
-  api_sso_login       POST     ANY      ANY    /api/sso/login
-
-  api_github_connect  GET      ANY      ANY    /api/github/connect
-  api_github_check    GET      ANY      ANY    /api/github/check
-
-  api_todos           GET      ANY      ANY    /api/todos
-
-  app_home            ANY      ANY      ANY    /
-  app_profile         GET      ANY      ANY    /profile
-  app_login           ANY      ANY      ANY    /login
-  app_logout          ANY      ANY      ANY    /logout
- ------------------- -------- -------- ------ --------------------------
+  -------------------- -------- -------- ------ --------------------------
+  Name                 Method   Scheme   Host   Path
+ -------------------- -------- -------- ------ --------------------------
+  _preview_error       ANY      ANY      ANY    /_error/{code}.{_format}
+  app_home             ANY      ANY      ANY    /
+  api_github_connect   GET      ANY      ANY    /api/github/connect
+  api_github_check     GET      ANY      ANY    /api/github/check
+  app_profile          GET      ANY      ANY    /profile
+  app_login            ANY      ANY      ANY    /login
+  app_logout           ANY      ANY      ANY    /logout
+  api_siam_check       GET      ANY      ANY    /api/siam/check
+ -------------------- -------- -------- ------ --------------------------
 ```
 
-#### api_mock_*
-> there are 3x mocked APIs as the replacement of the classic oauth2 REST API
-
-#### api_sso_*
-> To make the sso possible in a PHP or SPA or mobile APP, there are 3x utility APIs to construct the SSO authorization-code-flow.
-
-#### api_*
-> the dummy restful resource API, which is authenticated with additional header `X-AUTH-TOKEN`
-
-#### app_*
-> they are the standard symfony application routes
-
-#### api_github_*
-> sso connection via Oauth2 API `GitHub Oauth2`
-
-
-## E2E Tests
+## E2E Tests (deprecated)
 `login via form`, `login via sso` are tested by cypressE2E tests. To start the tests:
 ```bash
 # be sure that `http://ssomoc.localhost` is reachable.
