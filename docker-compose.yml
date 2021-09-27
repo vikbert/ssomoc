@@ -2,6 +2,7 @@ version: '3'
 
 services:
   siam:
+      # git clone https://bitbucket.schwarz/scm/~zhoux/siam-oauth2-fake-server.git siam
       build: ./docker/siam
       image: siamoc:latest
       working_dir: /var/www
