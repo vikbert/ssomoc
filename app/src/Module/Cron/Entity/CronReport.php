@@ -36,7 +36,7 @@ class CronReport
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private ?float $runTime;
+    private ?float $runDuration;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -92,7 +92,7 @@ class CronReport
         $this->finished = true;
         $this->exitCode = $exitCode;
         $this->output = $output;
-        $this->runTime = $this->calculateRuntimeInSeconds();
+        $this->runDuration = $this->calculateRunDurationInSeconds();
     }
 
     public function error(string $output, ?int $exitCode = null): void
@@ -100,12 +100,12 @@ class CronReport
         $this->finished = false;
         $this->exitCode = $exitCode;
         $this->output = $output;
-        $this->runTime = $this->calculateRuntimeInSeconds();
+        $this->runDuration = $this->calculateRunDurationInSeconds();
     }
 
-    public function getRunTime(): ?float
+    public function getRunDuration(): ?float
     {
-        return $this->runTime;
+        return $this->runDuration;
     }
 
     public function getExitCode(): ?int
@@ -123,7 +123,7 @@ class CronReport
         return $this->jobId;
     }
 
-    private function calculateRuntimeInSeconds(): int
+    private function calculateRunDurationInSeconds(): int
     {
         return (new DateTimeImmutable())->getTimestamp() - $this->startedAt->getTimestamp();
     }

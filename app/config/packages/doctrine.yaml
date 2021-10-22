@@ -20,5 +20,5 @@ doctrine:
                 is_bundle: false
                 type: annotation
                 dir: '%kernel.project_dir%/src/Module/Cron/Entity'
-                prefix: 'App\Modules\Cron\Entity'
+                prefix: 'App\Module\Cron\Entity'
                 alias: Cron

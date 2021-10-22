@@ -15,7 +15,7 @@ final class CronWatchCommand extends Command
     private const TIME_LIMIT_IN_SECONDS = 600;
     private const MEMORY_LIMIT_IN_MB = 256;
     private const REPEAT_LIMIT = 20;
-    protected static $defaultName = 'carsales:cron:watch';
+    protected static $defaultName = 'cron:watch';
     private $repeatCounter = 0;
     private $startTime;
     private $cronExecutor;
@@ -38,7 +38,7 @@ final class CronWatchCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         while (true) {
-            $io->writeln('Looking for cronjobs...');
+            $io->writeln('Looking for scheduled cron jobs...');
 
             try {
                 $this->assertLimitIsNotReached();
@@ -59,7 +59,6 @@ final class CronWatchCommand extends Command
 
             sleep(5);
             ++$this->repeatCounter;
-            $io->writeln('loop counter incremented: ' . $this->repeatCounter);
         }
     }
 

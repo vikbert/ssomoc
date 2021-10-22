@@ -15,6 +15,7 @@ start: ## start the application
 	sleep 5
 	docker-compose exec php composer install
 	make db-migrate
+	make db-fixtures
 	open http://localhost
 
 restart: ## restart the application
@@ -27,6 +28,10 @@ restart: ## restart the application
 db-reset: ## reset the db
 	make db-clean
 	make db-migrate
+	make db-fixtures
+
+db-fixtures: ## load data fixtures
+	docker-compose exec php bin/console doctrine:fi:load
 
 db-clean: ## clean the db
 	docker-compose exec php bin/console doctrine:database:drop --if-exists -n --force

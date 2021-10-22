@@ -24,11 +24,6 @@ class CronJob
     private UuidInterface $id;
 
     /**
-     * @ORM\Column(length=128, unique=true )
-     */
-    private string $name;
-
-    /**
      * @ORM\Column(length=1024, unique=true)
      */
     private string $command;
@@ -48,35 +43,23 @@ class CronJob
      */
     private bool $enabled;
 
-    public function __construct(string $name, string $command, string $schedule, bool $enabled, ?string $description = null)
+    public function __construct(string $command, string $schedule, bool $enabled, ?string $description = null)
     {
         $this->id = Uuid::uuid4();
-        $this->name = $name;
         $this->command = trim($command);
         $this->schedule = trim($schedule);
         $this->enabled = $enabled;
         $this->description = $description;
     }
 
+    public function __toString(): string
+    {
+        return $this->command;
+    }
+
     public function getId(): UuidInterface
     {
         return $this->id;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    private function validateCommandCharacters(): void
-    {
-        $forbiddenChars = ['&', '|', ';'];
-
-        $cleanCommand = str_replace($forbiddenChars, '', $this->command);
-
-        if ($cleanCommand !== $this->command) {
-            throw new RuntimeException(sprintf('Forbidden characters %s found in job command: %s.', json_encode($forbiddenChars), $this->command));
-        }
     }
 
     public function getCommand(): string
@@ -109,5 +92,16 @@ class CronJob
     public function isEnabled(): bool
     {
         return $this->enabled;
+    }
+
+    private function validateCommandCharacters(): void
+    {
+        $forbiddenChars = ['&', '|', ';'];
+
+        $cleanCommand = str_replace($forbiddenChars, '', $this->command);
+
+        if ($cleanCommand !== $this->command) {
+            throw new RuntimeException(sprintf('Forbidden characters %s found in job command: %s.', json_encode($forbiddenChars), $this->command));
+        }
     }
 }

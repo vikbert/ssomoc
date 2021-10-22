@@ -15,6 +15,7 @@ use RuntimeException;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\StyleInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Process\Process;
@@ -31,6 +32,7 @@ final class CronExecutor
     private $kernel;
     private $cronJobRepository;
     private $cronReportRepository;
+    private ?array $cachedJobs = null;
 
     public function __construct(
         KernelInterface $kernel,
@@ -42,20 +44,31 @@ final class CronExecutor
         $this->cronReportRepository = $cronReportRepository;
     }
 
+    /**
+     * @return CronJob[]
+     */
+    private function getEnabledCronJobs(StyleInterface $io): array
+    {
+        if ($this->cachedJobs === null) {
+            $this->cachedJobs = $this->cronJobRepository->findEnabled();
+            $io->success(sprintf('Found %d enabled job(s).', count($this->cachedJobs)));
+        }
+
+        return $this->cachedJobs;
+    }
+
     public function runScheduledJobs(?OutputInterface $output = null): OutputInterface
     {
         $output = $output ?? new BufferedOutput();
 
         $io = new SymfonyStyle(new ArrayInput([]), $output);
 
-        $jobs = $this->cronJobRepository->findEnabled();
+        $jobs = $this->getEnabledCronJobs($io);
         if (0 === count($jobs)) {
-            $io->warning('No enabled jobs have been found.');
+            $io->warning('No enabled jobs found');
 
             return $output;
         }
-
-        $io->success(sprintf('Found %d enabled job(s).', count($jobs)));
 
         $referenceTime = $this->createReferenceDateTime();
         $jobsExecuted = 0;
@@ -72,7 +85,7 @@ final class CronExecutor
                         sprintf(
                             'Job "%s" has already been started: %s ',
                             $job->getId()->toString(),
-                            $job->getName()
+                            (string) $job
                         )
                     );
                     continue;
@@ -81,7 +94,7 @@ final class CronExecutor
                 $io->comment(
                     sprintf(
                         'Starting job "%s" (%s):',
-                        $job->getName(),
+                        (string) $job,
                         $job->getId()->toString()
                     )
                 );
@@ -92,7 +105,7 @@ final class CronExecutor
                 $io->comment(
                     sprintf(
                         'Finished job "%s" (%s).',
-                        $job->getName(),
+                        (string) $job,
                         $job->getId()->toString()
                     )
                 );
@@ -102,7 +115,7 @@ final class CronExecutor
         }
 
         if (0 === $jobsExecuted) {
-            $io->warning('No scheduled jobs have been found.');
+            $io->warning('No scheduled jobs found for current time.');
         }
 
         return $output;
