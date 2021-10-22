@@ -38,14 +38,16 @@ final class CronWatchCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         while (true) {
-            $io->writeln('Looking for scheduled cron jobs...');
+            $io->info('Looking for the scheduled cron jobs...');
 
             try {
-                $this->assertLimitIsNotReached();
-            } catch (Throwable $e) {
+                $this->assertMemoryLimit();
+                $this->assertTimeLimit();
+                $this->assertWatcherRepeatLimit();
+            } catch (CronException $e) {
                 $io->error($e->getMessage());
 
-                return 99;
+                return 0;
             }
 
             try {
@@ -62,36 +64,24 @@ final class CronWatchCommand extends Command
         }
     }
 
-    /**
-     * @throws CronException
-     */
-    private function assertLimitIsNotReached(): void
+    private function assertMemoryLimit(): void
     {
-        if ($this->isMemoryLimitReached()) {
+        if ((memory_get_usage(true) / 1024 / 1024) > self::MEMORY_LIMIT_IN_MB) {
             throw CronException::onMemoryLimitReached();
         }
+    }
 
-        if ($this->isTimeLimitReached()) {
+    private function assertTimeLimit(): void
+    {
+        if ((time() - $this->startTime) > self::TIME_LIMIT_IN_SECONDS) {
             throw CronException::onTimeLimitReached();
         }
+    }
 
-        if ($this->isWatcherRepeatLimitReached()) {
+    private function assertWatcherRepeatLimit(): void
+    {
+        if ($this->repeatCounter > self::REPEAT_LIMIT) {
             throw CronException::onWatcherRepeatLimitReached();
         }
-    }
-
-    private function isMemoryLimitReached(): bool
-    {
-        return (memory_get_usage(true) / 1024 / 1024) > self::MEMORY_LIMIT_IN_MB;
-    }
-
-    private function isTimeLimitReached(): bool
-    {
-        return (time() - $this->startTime) > self::TIME_LIMIT_IN_SECONDS;
-    }
-
-    private function isWatcherRepeatLimitReached(): bool
-    {
-        return $this->repeatCounter > self::REPEAT_LIMIT;
     }
 }

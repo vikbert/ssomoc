@@ -91,31 +91,32 @@ final class CronExecutor
                     continue;
                 }
 
-                $io->comment(
+                $io->writeln(
                     sprintf(
-                        'Starting job "%s" (%s):',
-                        (string) $job,
-                        $job->getId()->toString()
+                        'Starting Job "%s": (%s)',
+                        $job->getId()->toString(),
+                        (string) $job
                     )
                 );
 
                 $this->execute($job, $dueTime, $output);
                 ++$jobsExecuted;
 
-                $io->comment(
+                $io->writeln(
                     sprintf(
-                        'Finished job "%s" (%s).',
-                        (string) $job,
-                        $job->getId()->toString()
+                        'Finished Job "%s": (%s)',
+                        $job->getId()->toString(),
+                        (string) $job
                     )
                 );
+                $io->writeln('');
 
                 break;
             }
         }
 
         if (0 === $jobsExecuted) {
-            $io->warning('No scheduled jobs found for current time.');
+            $io->warning('No scheduled jobs found for current time');
         }
 
         return $output;
