@@ -16,3 +16,9 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
+            Cron:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Module/Cron/Entity'
+                prefix: 'App\Modules\Cron\Entity'
+                alias: Cron

@@ -7,6 +7,8 @@
         "php": "^7.4.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
+        "adhocore/cron-expr": "^1.1",
         "composer/package-versions-deprecated": "^1.11.99.1",
         "doctrine/doctrine-bundle": "^2.2",
         "doctrine/doctrine-migrations-bundle": "^3.0",
